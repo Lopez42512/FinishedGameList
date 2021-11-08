@@ -1,0 +1,30 @@
+{
+  "name": "finishedgamelist",
+  "version": "1.0.0",
+  "description": "A list that saves all the games I've completed this year",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lopez42512/FinishedGameList.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "Mongoose",
+    "React",
+    "MERN"
+  ],
+  "author": "Ismael Lopez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lopez42512/FinishedGameList/issues"
+  },
+  "homepage": "https://github.com/Lopez42512/FinishedGameList#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  }
+}
