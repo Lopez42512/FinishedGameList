@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/Lopez42512/FinishedGameList#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "got": "^11.8.2",
     "mongoose": "^6.0.12"
   }
 }

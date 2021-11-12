@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gamesbeaten", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-//   useCreateIndex: true,
-//   useFindAndModify: false
+
+// connecting to mongodb atlus
+mongoose.connect('').then(() => {
+console.log("Connected to Database");
+}).catch((err) => {
+    console.log("Not Connected to Database ERROR! ", err);
 });
+
 
 module.exports = mongoose.connection;

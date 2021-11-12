@@ -1,14 +1,20 @@
-const express = require('express');
-const db = require("./config/connection")
-const routes = require("./routes/gameRoutes")
+const express = require("express");
+const db = require("./config/connection");
+const routes = require("./routes/gameRoutes");
 const app = express();
-const PORT = process.env.PORT || 3001
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
-app.use(routes)
+const cors = require("cors");
 
-db.once('open', () => {
-    app.listen(PORT, () => {
-        console.log(`App listening on port ${PORT}`);
-    })
-})
+const PORT = process.env.PORT || 3001;
+
+// needed to allow connection between express and react app
+app.options('*', cors())
+
+app.use(cors())
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(routes, cors());
+
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
