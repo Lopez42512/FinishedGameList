@@ -1,6 +1,6 @@
 const express = require("express");
 const db = require("./config/connection");
-const routes = require("./routes/gameRoutes");
+const routes = require("./routes/index");
 const app = express();
 const cors = require("cors");
 

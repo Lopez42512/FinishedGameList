@@ -5,8 +5,9 @@ const got = require('got');
 const gameController = {
     
     getGames(req,res){
-        // get all the games in the database
-        Game.find()
+        // get all the games in the database that pertains to the user
+        const {user_id} = (req.params)
+        Game.find({user_id: user_id})
         .then((gameData) => {
             res.json(gameData)
         })
@@ -17,14 +18,16 @@ const gameController = {
     },
     // add a game to the database
     async createGame(req,res){
+        const {user_id} = req.params
         const {name} = req.body;
         // gets images from api to match with game, add an await to wait for image to return before continuing function
         const gameImage = await getImages(name);
         // add game image to req.body object to create game 
         req.body.image = gameImage;
+        req.body.user_id = user_id
         Game.create(req.body)
         .then(() => {
-            res.redirect('http://localhost:3000/')
+            res.redirect(`http://localhost:3000/user/${user_id}`)
         })
         .catch((err) => {
             console.log(err)
@@ -33,12 +36,12 @@ const gameController = {
     },
     deleteGame(req, res){
         // get the id of the game to get ready to delete from db
-        const {id} = req.params
+        const {id} = req.params;
+        const {user_id} = req.params;
         // delete game from db
-        Game.deleteOne({_id: id})
+        Game.deleteOne({user_id: user_id,_id: id})
         .then((data) => {
-            console.log(data)
-            res.json("I deleted the game")
+            res.json('game was deleted')
         })
         
     }
@@ -57,5 +60,6 @@ async function getImages(game) {
     // return the img link
     return(myBlob.body.background_image);
 }
+
 
 module.exports = gameController;

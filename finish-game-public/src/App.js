@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
+import {useParams} from 'react-router-dom';
+// import Login from './component/login';
+// import Signup from './component/signup';
 
 function App() {
   const [game, setGame] = useState([]);
+  const {id} = useParams();
   // get all the games from the server to populate the game cards
   useEffect(() => {
+    
+    console.log(id)
     try {
-      fetch("http://localhost:3001/")
+      fetch(`http://localhost:3001/games/${id}`)
         .then((res) => res.json())
         .then((response) => setGame(response));
     } catch (error) {
@@ -13,10 +19,10 @@ function App() {
     }
   }, []);
   // handle the button click that deletes the desire game
-  const handleDelete = (id) => {
-    const {name} = id.target;
+  const handleDelete = (e) => {
+    const {name} = e.target;
     try {
-      fetch(`http://localhost:3001/${name}`, {
+      fetch(`http://localhost:3001/games/${id}/${name}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'text/plain'
@@ -26,7 +32,8 @@ function App() {
       .then(res => res.json())
       .then(response => {
         // redirect back to home page after the game has been deleted
-        window.location.href = "http://localhost:3000/"
+        console.log(id)
+        window.location.href = `http://localhost:3000/user/${id}`
       })
     }
     catch(err) {
@@ -48,16 +55,18 @@ function App() {
   });
   return (
     <div className="App">
-      <form action="http://localhost:3001/" method="post">
-        <label htmlFor="fname">First name:</label>
+      <a href='http://localhost:3000'>Log out</a>
+      <form action={`http://localhost:3001/games/${id}`} method="post">
+        <label htmlFor="fname">Game Name</label>
         <input type="text" id="fname" name="name" />
-        <label htmlFor="lname">Last name:</label>
+        <label htmlFor="lname">System</label>
         <input type="text" id="lname" name="system" />
-        <label htmlFor="lname">Last name:</label>
+        <label htmlFor="lname">Rating</label>
         <input type="text" id="lname" name="rating" />
         <input type="submit" value="Submit" />
       </form>
       {renderGame}
+      
     </div>
     )
 }
