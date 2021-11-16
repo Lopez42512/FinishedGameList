@@ -19,11 +19,11 @@ function Login() {
     })
       .then((res) => res.json())
       .then((response) => {
-        if (response._id === null) {
-          window.location.href = `http://localhost:3000/`;
-        } else {
+        if (response) {
           const { _id } = response;
           window.location.href = `http://localhost:3000/user/${_id}`;
+        } else {
+          window.location.href = `http://localhost:3000/`;
         }
       });
   };

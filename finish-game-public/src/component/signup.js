@@ -26,6 +26,7 @@ function Signup() {
         .then((response) => {
           console.log(response);
           if (response === "user created") {
+            setCreatedUser(false)
             window.location.href = "http://localhost:3000";
           } else {
               setCreatedUser(true)
@@ -52,7 +53,7 @@ function Signup() {
         console.log("nani");
     }
   };
-  const userAlarm = <h1>User Not created</h1>
+  const userAlarm = <h1>User already exist please login or try another email</h1>
   return (
     <div>
         {createdUser ? userAlarm: ''}

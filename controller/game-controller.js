@@ -1,5 +1,6 @@
 const Game = require('../models/Games')
 const got = require('got');
+const {apiKey} = require('../keys/keys')
 
 // controller is used to assemble all the functions for the database to use
 const gameController = {
@@ -52,7 +53,7 @@ async function getImages(game) {
     // replace all empty spaces with - because api doesn't allow empty space
     const gameSearch = game.replace(/\s/g, '-')
     // link for api call
-    const rawg = `https://api.rawg.io/api/games/${gameSearch}?key=`
+    const rawg = `https://api.rawg.io/api/games/${gameSearch}?key=${apiKey}`
     // api request
     let response = await got.get(rawg, {responseType: 'json'});
     // get the response from api call
